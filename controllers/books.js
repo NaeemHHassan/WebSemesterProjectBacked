@@ -15,6 +15,7 @@ router.get("/:id", auth, async (req, res) => {
 });
 
 router.get("/", auth, async (req, res) => {
+  console.log("books");
   res.send(await Book.find());
 });
 router.post("/", async (req, res) => {
