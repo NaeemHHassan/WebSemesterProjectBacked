@@ -1,0 +1,4 @@
+{
+  "jwtPrivateKey": "BookShopPrivateKey",
+  "db": "mongodb://localhost/BookShopAppDB"
+}
