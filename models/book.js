@@ -25,7 +25,7 @@ const bookSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  descirption: {
+  description: {
     type: String,
     required: false
   },

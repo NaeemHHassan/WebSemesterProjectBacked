@@ -5,8 +5,10 @@ const { Book } = require("../models/book");
 const express = require("express");
 const router = express.Router();
 
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", async (req, res) => {
+  console.log(req.params.id);
   const book = await Book.findById(req.params.id);
+  console.log(book);
   if (!book) {
     res.status(400).send("Book Not Found");
   } else {
@@ -14,8 +16,7 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
-router.get("/", auth, async (req, res) => {
-  console.log("books");
+router.get("/", async (req, res) => {
   res.send(await Book.find());
 });
 router.post("/", async (req, res) => {
@@ -26,19 +27,20 @@ router.post("/", async (req, res) => {
     "quantityInStock",
     "price",
     "description",
-    "reviews",
     "ratting"
   ]);
 
+  console.log(attrib);
+
   const book = new Book(attrib);
 
-  const result = await book.save();
-  res.send(result);
+  const books = await book.save();
+  res.send(books);
 });
 
-router.delete("/:id", auth, (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   const id = req.params.id;
-  const book = Book.findByIdAndDelete(id);
+  const book = await Book.findByIdAndDelete(id);
   if (book) res.send(book);
   else {
     res.status(400).send("Book Not Found");
@@ -46,7 +48,6 @@ router.delete("/:id", auth, (req, res) => {
 });
 
 router.put("/:id", auth, async (req, res) => {
-  console.log(b);
   const attrib = _.pick(req.body, [
     "title",
     "author",
