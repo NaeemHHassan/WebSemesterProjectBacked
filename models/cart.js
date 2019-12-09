@@ -3,14 +3,13 @@ const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
+const items = new mongoose.Schema({
+  itemId: String,
+  noOfItems: Number
+});
 const cartSchema = new mongoose.Schema({
   userId: { type: String, required: true },
-  items: [
-    {
-      itemId: String,
-      noOfItems: Number
-    }
-  ]
+  items: [items]
 });
 
 const Cart = mongoose.model("Cart", cartSchema);

@@ -6,9 +6,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/:id", async (req, res) => {
-  console.log(req.params.id);
   const book = await Book.findById(req.params.id);
-  console.log(book);
   if (!book) {
     res.status(400).send("Book Not Found");
   } else {
@@ -29,8 +27,6 @@ router.post("/", async (req, res) => {
     "description",
     "ratting"
   ]);
-
-  console.log(attrib);
 
   const book = new Book(attrib);
 
